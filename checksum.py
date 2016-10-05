@@ -26,25 +26,19 @@ class GUIChecksumCalculator:
     def open_file(self):
         self.infoText.set("Loading file...")
         filename = askopenfilename()
-
         with open(filename) as file_to_check:
             start = time.clock()
             data = file_to_check.read()
             formattedfilename = filename[filename.rfind('/'):len(filename)].replace('/', '')
-            alist = ["MD5:    " + hashlib.md5(data).hexdigest() + "\n", "CRC:    " + crc(filename) + "\n",
-                     "SHA1:   " + hashlib.sha1(data).hexdigest() + "\n",
-                     "SHA224: " + hashlib.sha224(data).hexdigest() + "\n",
-                     "SHA256: " + hashlib.sha256(data).hexdigest() + "\n",
-                     "SHA384: " + hashlib.sha384(data).hexdigest() + "\n",
-                     "SHA512: " + hashlib.sha512(data).hexdigest() + "\n"]
+            alist = ["MD5:    " + hashlib.md5(data).hexdigest() + "\n", "CRC:    " + crc(filename) + "\n","SHA1:   " + hashlib.sha1(data).hexdigest() + "\n","SHA224: " + hashlib.sha224(data).hexdigest() + "\n",
+                     "SHA256: " + hashlib.sha256(data).hexdigest() + "\n","SHA384: " + hashlib.sha384(data).hexdigest() + "\n","SHA512: " + hashlib.sha512(data).hexdigest() + "\n"]
             self.text.insert(END, "\n------------------------------------------------------------------\n")
             self.text.insert(END, formattedfilename + " Calculated. Took: " + "{0:.4f}".format(time.clock() - start) + " sec")
             self.text.insert(END, "\n------------------------------------------------------------------")
-            for thingy in alist:
-                self.text.insert(END, "\n" + thingy)
+            for checksum in alist:
+                self.text.insert(END, "\n" + checksum)
             self.text.insert(END, "\n------------------------------------------------------------------")
             self.infoText.set("Loading done (" + formattedfilename + ")")
-
 
     def save_file(self):
         f = tkFileDialog.asksaveasfile(mode='w', defaultextension=".txt")
@@ -54,7 +48,6 @@ class GUIChecksumCalculator:
         f.write(str(self.text.get(1.0, END)))
         self.infoText.set("File saved in: " + f.name)
         f.close()
-
 
 def crc(filename):  # thanks http://stackoverflow.com/users/224656/bastian
     prev = 0
