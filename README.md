@@ -3,8 +3,8 @@
 A very basic but portable (<3kb) graphical checksum calculator written in Python. Shouldn't require any dependencies other than Python 2.7 itself. Shoddy code included.
 
 
-MIT License
-Copyright (c) 2016 
+#MIT License
+Copyright (c) 2016
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
